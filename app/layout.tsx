@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import './globals.css'
 
 export const metadata: Metadata = {
   title: 'Helix Academy - Mock 1.0',
@@ -6,7 +7,6 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Helix Academy - Mock 1.0',
     description: 'Master UTME with precision. Your gateway to exam readiness and academic success.',
-    images: ['/og-image.png'], // We'll add this later if needed
   }
 }
 
