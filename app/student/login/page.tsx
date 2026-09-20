@@ -7,6 +7,7 @@ import Link from 'next/link'
 export default function StudentLoginPage() {
   const [passcode, setPasscode] = useState('')
   const [error, setError] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
   const router = useRouter()
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -33,7 +34,17 @@ export default function StudentLoginPage() {
 
       {/* Content */}
       <div className="relative z-10 w-full max-w-md px-6">
-        <div className="bg-[#112240] border border-[#233554] rounded-2xl p-8 shadow-2xl">
+        <div className="bg-[#112240] border border-[#233554] rounded-2xl p-10 shadow-2xl">
+          {/* Icon */}
+          <div className="flex justify-center mb-6">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="32" cy="24" r="12" stroke="#64ffda" strokeWidth="2" fill="none"/>
+              <path d="M16 52C16 43.163 23.163 36 32 36C40.837 36 48 43.163 48 52" stroke="#64ffda" strokeWidth="2" strokeLinecap="round" fill="none"/>
+              <path d="M24 16L28 12M36 16L32 12" stroke="#64ffda" strokeWidth="2" strokeLinecap="round"/>
+              <circle cx="32" cy="24" r="6" fill="#64ffda" opacity="0.2"/>
+            </svg>
+          </div>
+
           <h1 
             className="text-3xl font-bold text-white mb-2 text-center"
             style={{ fontFamily: '"Playfair Display", Georgia, serif' }}
@@ -49,18 +60,39 @@ export default function StudentLoginPage() {
               <label htmlFor="passcode" className="block text-[#ccd6f6] text-sm font-medium mb-2">
                 Passcode
               </label>
-              <input
-                id="passcode"
-                type="password"
-                value={passcode}
-                onChange={(e) => {
-                  setPasscode(e.target.value)
-                  setError('')
-                }}
-                className="w-full px-4 py-3 bg-[#0a192f] border border-[#233554] rounded-lg text-white placeholder-[#586279] focus:outline-none focus:border-[#3d5a80] transition"
-                placeholder="Enter passcode"
-                autoComplete="off"
-              />
+              <div className="relative">
+                <input
+                  id="passcode"
+                  type={showPassword ? 'text' : 'password'}
+                  value={passcode}
+                  onChange={(e) => {
+                    setPasscode(e.target.value)
+                    setError('')
+                  }}
+                  className="w-full px-4 py-3 pr-12 bg-[#0a192f] border border-[#233554] rounded-lg text-white placeholder-[#586279] focus:outline-none focus:border-[#3d5a80] focus:ring-1 focus:ring-[#3d5a80] transition"
+                  placeholder="Enter passcode"
+                  autoComplete="off"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[#586279] hover:text-[#8892b0] transition"
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                >
+                  {showPassword ? (
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                      <circle cx="12" cy="12" r="3"/>
+                      <line x1="1" y1="1" x2="23" y2="23"/>
+                    </svg>
+                  ) : (
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                      <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                  )}
+                </button>
+              </div>
               {error && (
                 <p className="mt-2 text-red-400 text-sm font-medium">{error}</p>
               )}
@@ -68,13 +100,13 @@ export default function StudentLoginPage() {
 
             <button
               type="submit"
-              className="w-full bg-[#112240] hover:bg-[#0a192f] border border-[#233554] text-white font-semibold py-3 rounded-lg transition-all duration-200 hover:-translate-y-0.5"
+              className="w-full bg-[#112240] hover:bg-[#0a192f] border border-[#233554] text-white font-semibold py-3 rounded-lg transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
             >
               Login
             </button>
           </form>
 
-          <div className="mt-6 text-center">
+          <div className="mt-8 text-center">
             <Link
               href="/fork"
               className="text-[#586279] hover:text-[#8892b0] text-sm font-medium transition"
